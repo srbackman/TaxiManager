@@ -8,6 +8,15 @@ public enum VehicleType
     taxi
 }
 
+public enum VehicleStateType
+{
+    idling,
+    roaming,
+    patrolling,
+    summoned,
+    transporting
+}
+
 public enum DriverPositivieType
 {
     normal,         //-
@@ -44,6 +53,7 @@ public class VehicleEntity : MonoBehaviour
     [SerializeField] private DriverPositivieType DriverPositivie = DriverPositivieType.normal;
     [SerializeField] private DriverNegativeType DriverNegative = DriverNegativeType.normal;
 
+    public VehicleStateType VehicleState = VehicleStateType.idling;
     public float CurrentTickAmount = 0f;
     public GameObject VehicleObject;
 

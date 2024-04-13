@@ -68,14 +68,15 @@ public class EntityMover : MonoBehaviour
     //    }
     //}
 
-    private void CheckIfAtDestination(List<Transform> _navigationNodeList)
+    public bool CheckIfAtDestination(Transform _navigationNodeList)
     {
-        float distance = Vector3.Distance(transform.position, _navigationNodeList[0].position);
+        float distance = Vector3.Distance(transform.position, _navigationNodeList.position);
 
         if (_entityNodeDistanceTreshold >= distance)
         {
-            print("clear: " + _navigationNodeList[0]);
-            _navigationNodeList.RemoveAt(0);
+            print("clear: " + _navigationNodeList);
+            return (true);
         }
+        return (false);
     }
 }

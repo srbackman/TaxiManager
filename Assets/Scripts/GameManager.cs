@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             lib.vehicleManager.TaxiManagment();
             lib.vehicleManager.CivieManagment();
             lib.cityManager.CityManagment();
-
+            
             Time -= TickInterval;
         }
     }
