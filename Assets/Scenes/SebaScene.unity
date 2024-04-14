@@ -600,6 +600,8 @@ MonoBehaviour:
   cam: {fileID: 1248058307}
   CivVehicleTypes:
   - {fileID: 11400000, guid: c6283c15c64584ef48037cedb20f48b6, type: 2}
+  - {fileID: 11400000, guid: a1888cbcd14ec4cd09473025bd7db0c0, type: 2}
+  - {fileID: 11400000, guid: b730e977132344fdd834fca83c2810ec, type: 2}
   TaxiVehicleTypes:
   - {fileID: 11400000, guid: bcdbac42485744041b9fbca9ef98004c, type: 2}
   VehicleBase: {fileID: 8304786636470670849, guid: d08cf79ac6830354a8142d1800957b90, type: 3}

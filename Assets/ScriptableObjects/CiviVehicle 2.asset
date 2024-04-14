@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 043a732d2f9bc4768ad0291008762163, type: 3}
-  m_Name: CiviVehicle 1
+  m_Name: CiviVehicle 2
   m_EditorClassIdentifier: 
   type: 0
-  sprite: {fileID: 1032932680, guid: ef6dc64abe752274d866b962a191053e, type: 3}
+  sprite: {fileID: -1287264512, guid: ef6dc64abe752274d866b962a191053e, type: 3}
