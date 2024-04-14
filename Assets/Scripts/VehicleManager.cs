@@ -168,7 +168,10 @@ public class VehicleManager : MonoBehaviour
             VehicleEntity vehicle = obj.GetComponent<VehicleEntity>();
             vehicle.Set(type, positivie, negative);
             vehicle.transform.position = nodes[Random.Range(0, nodes.Count - 1)].transform.position;
-            vehicle.CurrentRoute = lib.dijkstraSearch.GetRoute(vehicle.transform, GetRandomDestination());
+            while (vehicle.CurrentRoute.Count == 0)
+            {
+                vehicle.CurrentRoute = lib.dijkstraSearch.GetRoute(vehicle.transform, GetRandomDestination());
+            }
 
             if (vehicle.CurrentRoute == null)
                 print("null");
@@ -242,7 +245,7 @@ public class VehicleManager : MonoBehaviour
 
             if (vehicle.CurrentRoute.Count == 0)
                 vehicle.CurrentRoute = lib.dijkstraSearch.GetRoute(vehicle.transform, GetRandomDestination());
-
+            print(vehicle.CurrentRoute[0]);
             NodeRoutes node = vehicle.CurrentRoute[0].GetComponent<NodeRoutes>();
             if (node && !node.HasTraficLights) //no trafic lights
             {

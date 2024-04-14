@@ -607,13 +607,13 @@ MonoBehaviour:
   VehicleBase: {fileID: 8304786636470670849, guid: d08cf79ac6830354a8142d1800957b90, type: 3}
   TaxiParent: {fileID: 194939494}
   CiviParent: {fileID: 299029432}
-  CiviVehicleAmount: 8
-  fastSpeed: 2
+  CiviVehicleAmount: 50
+  fastSpeed: 1.5
   chattySpeed: 0.8
-  expertSpeed: 1.6
+  expertSpeed: 1.2
   slowSpeed: 0.5
   sadSpeed: 0.8
-  irritatedSpeed: 1.8
+  irritatedSpeed: 1.3
   happyMoney: 1.2
   chattyMoney: 1.6
   charismaticMoney: 2
@@ -1970,7 +1970,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
