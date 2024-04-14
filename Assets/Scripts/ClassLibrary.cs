@@ -8,4 +8,5 @@ public class ClassLibrary : MonoBehaviour
     public DijkstraSearch dijkstraSearch;
     public VehicleManager vehicleManager;
     public CityManager cityManager;
+    public EntityMover entityMover;
 }

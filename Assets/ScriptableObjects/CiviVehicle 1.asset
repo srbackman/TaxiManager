@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CiviVehicle 1
   m_EditorClassIdentifier: 
   type: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

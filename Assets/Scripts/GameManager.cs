@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float TickInterval = 1.0f;
 
-    private float Time = 0f;
+    private float _Time = 0f;
+    public int TotalMoney = 0;
 
     private void Awake()
     {
@@ -26,13 +27,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (Time >= TickInterval)
+        List<NodeRoutes> TraficLights = new List<NodeRoutes>();
+
+        _Time += Time.deltaTime;
+        while (_Time >= TickInterval)
         {
-            lib.vehicleManager.TaxiManagment();
-            lib.vehicleManager.CivieManagment();
             lib.cityManager.CityManagment();
+            TraficLights = lib.cityManager.TraficLightManagment();
+            TotalMoney += lib.vehicleManager.TaxiManagment(TraficLights);
+            lib.vehicleManager.CivieManagment(TraficLights);
             
-            Time -= TickInterval;
+            _Time -= TickInterval;
+            print("tick");
         }
     }
 }

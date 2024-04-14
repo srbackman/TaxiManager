@@ -23,14 +23,27 @@ public class NavigationNodes : MonoBehaviour
             }
             _nodeTransforms = withoutParent;
         }
-        else
+
+        List<Transform> filter = new List<Transform>();
+        for (int i = 1; i < _nodeTransforms.Length; i++)
         {
-            Transform[] withoutParent = new Transform[(originalLenght - 1) / _numberOfChildObjects];
-            for (int i = 1; i < (originalLenght - 1); i++)
-            {
-                withoutParent[i - 1] = _nodeTransforms[i];
-            }
-            _nodeTransforms = withoutParent;
+            filter.Add(_nodeTransforms[i]);
         }
+
+        _nodeTransforms = new Transform[_nodeTransforms.Length - 1];
+
+        for (int i = 0; i < _nodeTransforms.Length; i++)
+        {
+            _nodeTransforms[i] = filter[i];
+        }
+        //else
+        //{
+        //    Transform[] withoutParent = new Transform[(originalLenght - 1)];
+        //    for (int i = 1; i < (originalLenght - 1); i++)
+        //    {
+        //        withoutParent[i] = _nodeTransforms[i];
+        //    }
+        //    _nodeTransforms = withoutParent;
+        //}
     }
 }

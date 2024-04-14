@@ -41,10 +41,11 @@ public class EntityMover : MonoBehaviour
     //    CheckIfAtDestination();
     //}
 
-    public void Teleport(Transform currentTarget)
+    public void Teleport(Transform self, Transform currentTarget)
     {
-        transform.LookAt(currentTarget);
-        transform.position = currentTarget.position;
+        
+        //self.LookAt(currentTarget);
+        self.position = currentTarget.position;
     }
 
     public void Move(Transform currentTarget)

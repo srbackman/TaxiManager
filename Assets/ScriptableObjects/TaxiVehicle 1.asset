@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TaxiVehicle 1
   m_EditorClassIdentifier: 
   type: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: -2079933959, guid: 4e941799c548e7849aa5cabb24b6cfd0, type: 3}

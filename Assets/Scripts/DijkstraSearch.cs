@@ -24,13 +24,16 @@ public class DijkstraSearch : MonoBehaviour
         /*Find closest node available*/
         Transform start = FindClosestNode(entity);
 
+        //print(start);
+
         /*Dijkstra (or a modified version?) greedy search.*/
         DijkstraData[] dijkstraDatas = StartDijkstraSearch(start);
 
-        foreach (DijkstraData d in dijkstraDatas)
-        {
-            print(d._thisNodeTransform.name + " node has shortest to: " + d._shortestDistanceNodeTransform.name + ": " + d._shortestDistanceValue);
-        }
+        //foreach (DijkstraData d in dijkstraDatas)
+        //{
+        //    print(d._shortestDistanceNodeTransform + "   " + d._thisNodeTransform.name);
+        //    print(d._thisNodeTransform.name + " node has shortest to: " + d._shortestDistanceNodeTransform.name + ": " + d._shortestDistanceValue);
+        //}
 
         /*Validate DijkstraData.*/
         if (!ValidateDijkstraData(dijkstraDatas)) Debug.LogError("Validation failed!");
@@ -113,7 +116,7 @@ public class DijkstraSearch : MonoBehaviour
 
         while (currentNode)
         {
-            print("Scanning node: " + currentNode.name);
+            //print("Scanning node: " + currentNode.name);
             Transform closestNodeTransform = null;
             float closestNodeValue = float.MaxValue;
             NodeRoutes nodeRoutes = currentNode.GetComponent<NodeRoutes>();
@@ -134,10 +137,10 @@ public class DijkstraSearch : MonoBehaviour
                         closestNodeTransform = t;
                 }
 
-                print(currentNode.name + " distance to: " + t.name + ", is: " + distance + " and current best distance in: " + t.name + ", is: " + dijkstraData._shortestDistanceValue);
+                //print(currentNode.name + " distance to: " + t.name + ", is: " + distance + " and current best distance in: " + t.name + ", is: " + dijkstraData._shortestDistanceValue);
                 if (dijkstraData._shortestDistanceValue > distance)
                 {
-                    print("Saved");
+                    //print("Saved");
                     dijkstraData._shortestDistanceValue = distance;
                     dijkstraData._shortestDistanceNodeTransform = currentNode;
                 }

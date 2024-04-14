@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
-public enum TraficLightState
+public enum CustomerType
 {
-    Horizontal,
-    Vertical
+    normal,
+    senior,
+    petPerson,
+    police
 }
 
 public class Task
@@ -16,23 +18,40 @@ public class Task
     public Transform EndPoint;
     public int TimeElapsed;
     public int BonusTimeLimit;
+    public CustomerType Customer;
 }
+
 
 public class CityManager : MonoBehaviour
 {
     [SerializeField] private int MaxTasks = 12;
-    [SerializeField] private float NewTaskInterval = 7.0f;
+    [SerializeField] private float NewTaskMinInterval = 7.0f;
+    [SerializeField] private float NewTaskMaxInterval = 15.0f;
     [SerializeField] private int MinBonusTickLimit = 1;
     [SerializeField] private int MaxBonusTickLimit = 10;
 
     int IdCounter = 0;
     float NewTaskTimer = 0f;
     List<Task> Tasks = new List<Task>();
+    List<NodeRoutes> TraficLightJuncsions = new List<NodeRoutes>();
     ClassLibrary lib;
 
     private void Awake()
     {
         lib = FindFirstObjectByType<ClassLibrary>();
+    }
+
+    private void Start()
+    {
+        foreach (Transform nodeTransform in lib.navigationNodes._nodeTransforms)
+        {
+            NodeRoutes node = nodeTransform.GetComponent<NodeRoutes>();
+            if (node && node.HasTraficLights)
+            {
+                TraficLightJuncsions.Add(node);
+            }
+        }
+
     }
 
     private void CheckTasks()
@@ -44,7 +63,7 @@ public class CityManager : MonoBehaviour
             {
                 Task newTask = new Task();
                 IdCounter++;
-                NewTaskTimer = NewTaskInterval;
+                NewTaskTimer = Random.Range(NewTaskMinInterval, NewTaskMaxInterval);
                 int randomStartIndex = Random.Range(0, lib.navigationNodes._nodeTransforms.Length);
                 int randomEndIndex = -1;
                 while (randomEndIndex == -1 || randomEndIndex == randomStartIndex)
@@ -71,11 +90,61 @@ public class CityManager : MonoBehaviour
     public void CityManagment()
     {
         CheckTasks();
-        TraficLightManagment();
+        
     }
 
-    private void TraficLightManagment()
+    public List<NodeRoutes> TraficLightManagment()
     {
+        foreach (NodeRoutes node in TraficLightJuncsions)
+        {
+            if (node.TraficGreenState == TraficLightState.Horizontal)
+            {
+                if (!CheckHorizontalRoad(node) && CheckVerticalRoad(node))
+                {
+                    node.TraficGreenState = TraficLightState.Vertical;
+                    node.TraficRedState = TraficLightState.Horizontal;
+                }
+            }
+            else //Green on vertical.
+            {
+                if (!CheckVerticalRoad(node) && CheckHorizontalRoad(node))
+                {
+                    node.TraficGreenState = TraficLightState.Horizontal;
+                    node.TraficRedState = TraficLightState.Vertical;
+                }
+            }
+        }
 
+        return (TraficLightJuncsions);
+    }
+
+    private bool CheckHorizontalRoad(NodeRoutes node)
+    {
+        foreach (Transform t in node._routes)
+        {
+            if (t.position.x == node.transform.position.x)
+                continue;
+
+            NodeRoutes horizontalNode = t.GetComponent<NodeRoutes>();
+            if (horizontalNode && horizontalNode.VehiclesAtNode > 0)
+                return (true);
+        }
+
+        return (false);
+    }
+
+    private bool CheckVerticalRoad(NodeRoutes node)
+    {
+        foreach (Transform t in node._routes)
+        {
+            if (t.position.y == node.transform.position.y)
+                continue;
+
+            NodeRoutes verticalNode = t.GetComponent<NodeRoutes>();
+            if (verticalNode && verticalNode.VehiclesAtNode > 0)
+                return (true);
+        }
+
+        return (false);
     }
 }
